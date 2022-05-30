@@ -3,7 +3,7 @@ class Model {
   retrieveAll() {
     return new Promise((resolve, reject) => {
       const request = new XMLHttpRequest();
-      request.open('GET', 'http://localhost:3000/api/todos');
+      request.open('GET', '/api/todos');
       request.responseType = 'json';
       request.addEventListener('load', () => {
         if (request.status >= 200 && request.status < 400) {
@@ -21,7 +21,7 @@ class Model {
   addTodo(data) {
     return new Promise((resolve, reject) => {
       const request = new XMLHttpRequest();
-      request.open('POST', 'http://localhost:3000/api/todos');
+      request.open('POST', '/api/todos');
       request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
       request.addEventListener('load', () => {
         if (request.status >= 200 && request.status < 400) {
@@ -42,7 +42,7 @@ class Model {
   deleteTodo(id) {
     return new Promise((resolve, reject) => {
       const request = new XMLHttpRequest();
-      request.open('DELETE', `http://localhost:3000/api/todos/${id}`);
+      request.open('DELETE', `/api/todos/${id}`);
       request.addEventListener('load', () => {
         if (request.status >= 200 && request.status < 400) {
           console.log('Todo was deleted');
@@ -62,7 +62,7 @@ class Model {
   updateTodo(id, todo) {
     return new Promise((resolve, reject) => {
       const request = new XMLHttpRequest();
-      request.open('PUT', `http://localhost:3000/api/todos/${id}`);
+      request.open('PUT', `/api/todos/${id}`);
       request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
       request.addEventListener('load', () => {
         if (request.status >= 200 && request.status < 400) {
@@ -83,7 +83,7 @@ class Model {
   updateCompleteStatus(id, keyValue) {
     return new Promise((resolve, reject) => {
       const request = new XMLHttpRequest();
-      request.open('PUT', `http://localhost:3000/api/todos/${id}`);
+      request.open('PUT', `/api/todos/${id}`);
       request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
       request.addEventListener('load', () => {
         if (request.status >= 200 && request.status < 400) {
