@@ -28,13 +28,9 @@ class Controller {
   }
 
   async retrieveAll() {
-    await this.model.retrieveAll()
-      .then((response) => {
-        this.view.allTodos = response;
-        this.view.updateAllTodos();
-      }).catch((err) => {
-        console.log(err);
-      });
+    const allTodos = await this.model.retrieveAll();
+    this.view.allTodos = allTodos;
+    this.view.updateAllTodos();
   }
 
   async updateTodo(id, todo) {
