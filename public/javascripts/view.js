@@ -121,19 +121,17 @@ class View {
       currentTodos = this.getAllCompleted();
       title = 'Completed';
     } else if (this.currentLocation === 'noDate') {
+      title = 'No Due Date';
       if (this.completeSelection) {
-        title = 'No Due Date';
         currentTodos = this.getAllCompleted(this.getTodosByDate());
       } else {
-        title = 'No Due Date';
         currentTodos = this.getTodosByDate();
       }
     } else if (this.currentLocation === 'all') {
-      currentTodos = this.allTodos;
       title = 'All Todos';
+      currentTodos = this.allTodos;
     } else {
       currentTodos = this.allTodos;
-      title = 'All Todos';
     }
     this.createTemplate(currentTodos);
     this.updateMainTitle(title, currentTodos.length);
@@ -195,7 +193,6 @@ class View {
     const allDates = {};
     const completed = {};
     const notDue = 'No Due Date';
-
     this.allTodos.forEach((todo) => {
       const { month } = todo;
       const { year } = todo;
@@ -223,14 +220,15 @@ class View {
         } else {
           allDates[notDue].push(todo);
         }
-      } else if (!allDates[name]) {
-        name = `${month}/${year.slice(-2)}`;
-        allDates[name] = [todo];
       } else {
-        allDates[name].push(todo);
+        name = `${month}/${year.slice(-2)}`;
+        if (!allDates[name]) {
+          allDates[name] = [todo];
+        } else {
+          allDates[name].push(todo);
+        }
       }
     });
-
     for (const [k, v] of Object.entries(allDates)) {
       const tempData = { date: k, count: v.length };
       this.navAllContainer.insertAdjacentHTML('beforeend', this.compiler(tempData));
